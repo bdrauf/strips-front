@@ -9,11 +9,13 @@ import { AuthContext } from '../context/authContext';
 
 const Single = () => {
   const [post, setPost] = useState({});
-  const { currentUser } = useContext(AuthContext);
+
   const location = useLocation();
   const navigate = useNavigate();
+
   const postId = location.pathname.split('/')[2];
 
+  const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +47,7 @@ const Single = () => {
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
-          {currentUser && currentUser.username === post.username && (
+          {currentUser.username === post.username && (
             <div className="edit">
               <Link to={`/write?edit=2`} state={post}>
                 <img src={Edit} alt="" />
@@ -58,11 +60,7 @@ const Single = () => {
         <p dangerouslySetInnerHTML={{ __html: post.desc }} />
       </div>
       <div className="menu">
-        {Array.isArray(post.cat) ? (
-          <Menu cat={post.cat} />
-        ) : (
-          <p>No categories available for this post.</p>
-        )}
+        <Menu cat={post.cat} />
       </div>
     </div>
   );
