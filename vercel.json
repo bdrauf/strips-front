@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/blog",
-      "destination": "https://4bdwij5v45.execute-api.us-west-2.amazonaws.com/blog"
+      "src": "/api/(.*)",
+      "dest": process.env.API + "/$1",
+      "headers": { "Access-Control-Allow-Origin": "*" }
     }
   ]
 }
