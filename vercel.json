@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "https://4bdwij5v45.execute-api.us-west-2.amazonaws.com/blog"
+    }
+  ]
+}
