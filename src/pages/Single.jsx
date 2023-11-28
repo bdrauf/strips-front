@@ -60,7 +60,11 @@ const Single = () => {
         <p dangerouslySetInnerHTML={{ __html: post.desc }} />
       </div>
       <div className="menu">
-        <Menu cat={post.cat} />
+        {Array.isArray(post.cat) ? (
+          <Menu cat={post.cat} />
+        ) : (
+          <p>No categories available for this post.</p>
+        )}
       </div>
     </div>
   );

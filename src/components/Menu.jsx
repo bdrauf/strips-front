@@ -7,7 +7,9 @@ export const Menu = ({ cat }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/posts/?cat=${cat}`);
+        // Ensure that cat is an array or provide a default value (an empty array)
+        const category = Array.isArray(cat) ? cat : [];
+        const res = await axios.get(`/api/posts/?cat=${category}`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -15,9 +17,10 @@ export const Menu = ({ cat }) => {
     };
     fetchData();
   }, [cat]);
+
   return (
     <div className="menu">
-      <h1>Other post you may like</h1>
+      <h1>Other posts you may like</h1>
       {posts.map((post) => (
         <div className="post" key={post.id}>
           <img src={post.img} alt="" />
